@@ -5,12 +5,13 @@ require 'optparse'
 module PhotoTimeliner
   class OptparseExample
     class ScriptOptions
-      attr_accessor :verbose, :source_directory, :target_directory
+      attr_accessor :verbose, :source_directory, :target_directory, :thread_number
 
       def initialize
         self.verbose = false
         self.source_directory = './fixtures/unsorted'
         self.target_directory = './fixtures/sorted'
+        self.thread_number = 8
       end
 
       def define_options(parser) # rubocop:disable Metrics/MethodLength
@@ -21,6 +22,7 @@ module PhotoTimeliner
         # add additional options
         source_directory_option(parser)
         target_directory_option(parser)
+        thread_number_option(parser)
 
         boolean_verbose_option(parser)
 
@@ -37,6 +39,13 @@ module PhotoTimeliner
         parser.on_tail('--version', 'Show version') do
           puts PhotoTimeliner::VERSION
           exit
+        end
+      end
+
+      def thread_number_option(parser)
+        parser.on('-n THREAD_NUMBER', '--thread_number THREAD_NUMBER', '[OPTIONAL] How many threads',
+                  Integer) do |thread_number|
+          self.thread_number = thread_number
         end
       end
 

@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
 
   spec.add_dependency 'exif'
+  spec.add_dependency 'thwait'
   spec.add_dependency 'zeitwerk'
 
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
