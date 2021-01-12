@@ -3,6 +3,11 @@
 require_relative "photo_timeliner/version"
 
 module PhotoTimeliner
-  class Error < StandardError; end
-  # Your code goes here...
+    class Main
+      def photo_timeliner(input)
+        input
+      end
+    end
+    class Error < StandardError; end
+  
 end
