@@ -5,7 +5,6 @@ require 'fileutils'
 require 'exif'
 require 'date'
 require 'json'
-# require 'celluloid'
 
 module PhotoTimeliner
   class ImageHandler

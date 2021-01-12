@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   end
   spec.bindir = 'exe'
 
-  spec.add_dependency 'celluloid'
   spec.add_dependency 'exif'
   spec.add_dependency 'zeitwerk'
 
