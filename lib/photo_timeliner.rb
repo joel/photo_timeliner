@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "photo_timeliner/version"
-
+require 'zeitwerk'
+loader = Zeitwerk::Loader.for_gem
+loader.setup
 module PhotoTimeliner
-    class Main
-      def photo_timeliner(input)
-        input
-      end
+  class Main
+    def photo_timeliner(input)
+      input
     end
-    class Error < StandardError; end
-  
+  end
+
+  class Error < StandardError; end
 end
