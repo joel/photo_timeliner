@@ -12,4 +12,6 @@ else
   exit 1
 fi
 
-ruby bin/sort.rb $@
+# bin/sort --verbose --source_directory /Volumes/Backup\ Spare/Corrupted\ Images --target_directory /Volumes/My\ Passport\ for\ Mac/Pictures
+
+ruby bin/sort.rb "$@"
