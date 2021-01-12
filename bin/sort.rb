@@ -5,9 +5,5 @@ require_relative '../lib/photo_timeliner'
 
 require 'pry'
 
-options = {
-  source_directory: './fixtures/unsorted',
-  target_directory: './fixtures/sorted'
-}
-
-PhotoTimeliner::Main.new(options).call
+instance = PhotoTimeliner::Cli.new
+instance.call
