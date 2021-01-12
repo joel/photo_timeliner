@@ -22,7 +22,7 @@ module PhotoTimeliner
     end
 
     def call
-      producer = get_producer
+      producer = queueing
 
       consumers = []
       options.thread_number.times.each { |consumer_number| consumers << get_consumer(consumer_number) }
@@ -49,7 +49,7 @@ module PhotoTimeliner
       PhotoTimeliner.configuration.options
     end
 
-    def get_producer
+    def queueing
       Thread.new do
         collection.each do |image_path|
           log("Reading... [#{File.basename(image_path).downcase}]")
