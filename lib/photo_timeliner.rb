@@ -25,7 +25,7 @@ module PhotoTimeliner
       producer = queueing
 
       consumers = []
-      options.thread_number.times.each { |consumer_number| consumers << get_consumer(consumer_number) }
+      options.parallel.times.each { |consumer_number| consumers << get_consumer(consumer_number) }
 
       # rubocop:disable Lint/RescueException
       # rubocop:disable Lint/SuppressedException

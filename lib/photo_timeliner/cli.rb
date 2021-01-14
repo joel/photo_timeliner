@@ -5,13 +5,14 @@ require 'optparse'
 module PhotoTimeliner
   class OptparseExample
     class ScriptOptions
-      attr_accessor :verbose, :source_directory, :target_directory, :thread_number
+      attr_accessor :verbose, :source_directory, :target_directory, :parallel, :exif_strategy
 
       def initialize
         self.verbose = false
         self.source_directory = './fixtures/unsorted'
         self.target_directory = './fixtures/sorted'
-        self.thread_number = 8
+        self.parallel = 8
+        self.exif_strategy = 'basic'
       end
 
       def define_options(parser) # rubocop:disable Metrics/MethodLength
@@ -22,7 +23,8 @@ module PhotoTimeliner
         # add additional options
         source_directory_option(parser)
         target_directory_option(parser)
-        thread_number_option(parser)
+        parallel_option(parser)
+        exif_strategy_option(parser)
 
         boolean_verbose_option(parser)
 
@@ -40,12 +42,14 @@ module PhotoTimeliner
           puts PhotoTimeliner::VERSION
           exit
         end
+
+        parser
       end
 
-      def thread_number_option(parser)
-        parser.on('-n THREAD_NUMBER', '--thread_number THREAD_NUMBER', '[OPTIONAL] How many threads',
-                  Integer) do |thread_number|
-          self.thread_number = thread_number
+      def parallel_option(parser)
+        parser.on('-n PARALLEL', '--parallel PARALLEL', '[OPTIONAL] How many threads',
+                  Integer) do |parallel|
+          self.parallel = parallel
         end
       end
 
@@ -60,6 +64,13 @@ module PhotoTimeliner
         parser.on('-t TARGET_DIRECTORY', '--target_directory TARGET_DIRECTORY',
                   '[OPTIONAL] Where the pictures will go', String) do |target_directory|
           self.target_directory = target_directory
+        end
+      end
+
+      def exif_strategy_option(parser)
+        parser.on('--exif_strategy [EXIF_STRATEGY]', %i[basic virtual],
+                  'Select the exif strategy (basic, virtual)') do |exif_strategy|
+          self.exif_strategy = exif_strategy
         end
       end
 
@@ -96,6 +107,9 @@ module PhotoTimeliner
       return if options.source_directory && options.target_directory
 
       help(example.option_parser)
+      exit(1)
+    rescue OptionParser::InvalidArgument => e
+      p e.message
       exit(1)
     end
 

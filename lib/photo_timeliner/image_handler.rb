@@ -36,8 +36,7 @@ module PhotoTimeliner
 
     def exif_date_time
       safe_exe(msg: 'EXIF') do
-        exif_info = Exif::Data.new(IO.read(image_path))
-        DateTime.strptime(exif_info.date_time, '%Y:%m:%d %H:%M:%S') if exif_info && exif_info&.date_time
+        ExifStrategy.new(image_path).call
       end
     end
 
