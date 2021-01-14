@@ -22,9 +22,11 @@ module PhotoTimeliner
 
       FileUtils.mkdir_p(File.dirname(target_file_path))
 
+      copy_cmd = 'cp -p -f'
+      copy_cmd << ' -v' if options.verbose
+
       system(
-        'cp -v -p -f '\
-        "#{escape(image_path)} #{escape(target_file_path)}"
+        "#{copy_cmd} #{escape(image_path)} #{escape(target_file_path)}"
       )
     end
 
