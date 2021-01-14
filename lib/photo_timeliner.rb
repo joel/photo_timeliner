@@ -17,6 +17,8 @@ Thread.ignore_deadlock = false
 module PhotoTimeliner
   extend Configure
   class Main
+    prepend Measuring
+
     def initialize
       @queue = Queue.new # SizedQueue.new(1)
     end
