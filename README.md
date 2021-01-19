@@ -2,9 +2,15 @@
 
 Sort Pictures by date. Reading the Exif information this script help to sort your unorganized pictures.
 
-<img width="242" alt="Screen Shot 2021-01-19 at 2 29 03 PM" src="https://user-images.githubusercontent.com/5789/105041701-9bf94980-5a63-11eb-9bfc-795ed678c8b2.png">
+<img width="425" alt="Screen Shot 2021-01-19 at 3 58 06 PM" src="https://user-images.githubusercontent.com/5789/105051613-390daf80-5a6f-11eb-99dc-1411b0b19d7d.png">
 
-<img width="418" alt="Screen Shot 2021-01-19 at 2 29 37 PM" src="https://user-images.githubusercontent.com/5789/105041713-9e5ba380-5a63-11eb-9618-ced67d58c3f8.png">
+<img width="428" alt="Screen Shot 2021-01-19 at 3 58 17 PM" src="https://user-images.githubusercontent.com/5789/105051604-3743ec00-5a6f-11eb-9697-0ea831517ced.png">
+
+The Exif information are used to sort the pictures, however, if those informations are not available the CTIME is used.
+
+The name is change following those rules:
+
+image-original-name.jpg => '%Y%m%d_%H%M%S-image-original-name.jpg
 
 ## Installation
 
