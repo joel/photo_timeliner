@@ -3,6 +3,8 @@ name: Ruby
 on: [push,pull_request]
 
 jobs:
+  name: Run Test Suite
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -11,10 +13,11 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.0
-    - name: Run the default task
+    - name: Install dependencies
       run: |
         gem install bundler -v 2.2.3
         bundle install
-        bundle exec rake
+    - name: Run tests
+      run: bundle exec rake
     - name: Run rubocop
       run: bundle exec rubocop
