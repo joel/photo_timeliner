@@ -3,9 +3,8 @@ name: Ruby
 on: [push,pull_request]
 
 jobs:
-  name: Run Test Suite
-
-  build:
+  test:
+    name: Run Test Suite
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
