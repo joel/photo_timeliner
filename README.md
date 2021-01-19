@@ -1,29 +1,31 @@
 # PhotoTimeliner
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/photo_timeliner`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Sort Pictures by date. Reading the Exif information this script help to sort your old pictures.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'photo_timeliner'
+```
+git clone https://github.com/joel/photo_timeliner
 ```
 
-And then execute:
+```
+cd photo_timeliner
+```
 
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install photo_timeliner
+```
+docker build --tag photo:timeliner .
+```
 
 ## Usage
 
-TODO: Write usage instructions here
-
+```
+docker run --rm --name timeliner \
+  --mount type=bind,source=(pwd),target=/workdir \
+  --workdir /workdir \
+  --mount "type=bind,source=/Volumes/My Backup Hard Disk,target=/workdir/unsorted" \
+  --mount "type=bind,source=/Volumes/Other Hard Disk/Pictures,target=/workdir/sorted" \
+-it photo:timeliner sh -c "sh /workdir/bin/sort --no-verbose --source_directory '/workdir/unsorted' --target_directory '/workdir/sorted' --parallel 32"
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
