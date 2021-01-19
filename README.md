@@ -1,6 +1,6 @@
 # PhotoTimeliner
 
-Sort Pictures by date. Reading the Exif information this script help to sort your unorganized pictures.
+Organize Pictures by date. Reading the Exif information this script help to sort your unorganized pictures.
 
 <img width="425" alt="Screen Shot 2021-01-19 at 3 58 06 PM" src="https://user-images.githubusercontent.com/5789/105051613-390daf80-5a6f-11eb-99dc-1411b0b19d7d.png">
 
