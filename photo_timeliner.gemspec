@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'exif'
   spec.add_dependency 'thwait'
   spec.add_dependency 'zeitwerk'
+  spec.add_dependency 'tty-progressbar'
 
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']

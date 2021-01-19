@@ -10,6 +10,7 @@ end
 
 require 'json'
 require 'thwait'
+require 'tty-progressbar'
 
 Thread.abort_on_exception = true
 Thread.ignore_deadlock = false
@@ -21,6 +22,8 @@ module PhotoTimeliner
 
     def initialize
       @queue = Queue.new # SizedQueue.new(1)
+      @sync = Mutex.new
+      @progress_bar = TTY::ProgressBar.new("copied [:bar]", total: collection.size)
     end
 
     def call
@@ -66,11 +69,13 @@ module PhotoTimeliner
           info = JSON.parse(info).transform_keys(&:to_sym)
           log("[#{consumer_number}] consumed #{info[:image_path]}")
           ImageHandler.new(**info).copy
+          # sync.synchronize { progress_bar.advance }
+          progress_bar.advance
         end
       end
     end
 
-    attr_reader :queue
+    attr_reader :queue, :sync, :progress_bar
   end
 
   class Error < StandardError; end

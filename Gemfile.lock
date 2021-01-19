@@ -4,6 +4,7 @@ PATH
     photo_timeliner (0.1.0)
       exif
       thwait
+      tty-progressbar
       zeitwerk
 
 GEM
@@ -59,8 +60,16 @@ GEM
       rubocop (~> 0.87)
       rubocop-ast (>= 0.7.1)
     ruby-progressbar (1.11.0)
+    strings-ansi (0.1.0)
     thwait (0.2.0)
       e2mmap
+    tty-cursor (0.7.1)
+    tty-progressbar (0.17.0)
+      strings-ansi (~> 0.1.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.7)
+      unicode-display_width (~> 1.6)
+    tty-screen (0.8.1)
     unicode-display_width (1.7.0)
     zeitwerk (2.4.2)
 
