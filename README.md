@@ -2,6 +2,10 @@
 
 Sort Pictures by date. Reading the Exif information this script help to sort your old pictures.
 
+<img width="242" alt="Screen Shot 2021-01-19 at 2 29 03 PM" src="https://user-images.githubusercontent.com/5789/105041701-9bf94980-5a63-11eb-9bfc-795ed678c8b2.png">
+
+<img width="418" alt="Screen Shot 2021-01-19 at 2 29 37 PM" src="https://user-images.githubusercontent.com/5789/105041713-9e5ba380-5a63-11eb-9618-ced67d58c3f8.png">
+
 ## Installation
 
 ```
