@@ -23,7 +23,7 @@ module PhotoTimeliner
     def initialize
       @queue = Queue.new # SizedQueue.new(1)
       @sync = Mutex.new
-      @progress_bar = TTY::ProgressBar.new("copied [:bar]", total: collection.size)
+      @progress_bar = TTY::ProgressBar.new('copied [:bar]', total: collection.size)
     end
 
     def call

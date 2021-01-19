@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PhotoTimeliner
   class Logger
     def info(msg)
