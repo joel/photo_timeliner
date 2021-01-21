@@ -7,7 +7,7 @@ RUN apk add --no-cache \
   git \
   # Gems need the dev-headers/compilers.
   build-base \
-  # PostgreSQL adapter needs the development headers.
+  # Gem Exif need the lib Exif
   libexif-dev
 
 ENV BUNDLER_VERSION 2.2.3
