@@ -68,7 +68,7 @@ module PhotoTimeliner
       end
 
       def exif_strategy_option(parser)
-        parser.on('--exif_strategy [EXIF_STRATEGY]', %i[basic virtual],
+        parser.on('--exif_strategy [EXIF_STRATEGY]', %i[basic virtual system],
                   'Select the exif strategy (basic, virtual)') do |exif_strategy|
           self.exif_strategy = exif_strategy
         end

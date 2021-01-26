@@ -28,6 +28,14 @@ module PhotoTimeliner
       system(
         "#{copy_cmd} #{escape(image_path)} #{escape(target_file_path)}"
       )
+
+      system(
+        "touch -a -m -t #{date_time.strftime('%Y%m%d%H%M')} #{escape(target_file_path)}"
+      )
+    end
+
+    def file_name
+      File.basename(image_path)
     end
 
     private

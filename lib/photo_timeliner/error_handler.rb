@@ -7,8 +7,8 @@ module PhotoTimeliner
       begin
         r = yield
       rescue StandardError => e
-        puts("[#{msg}] Execution Error")
-        puts(e.message)
+        log("[#{msg}] Execution Error [#{file_name}]")
+        log(e.message)
       end
       r
     end

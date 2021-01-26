@@ -47,7 +47,7 @@ module PhotoTimeliner
     private
 
     def collection
-      Dir.glob("#{options.source_directory}/**/*.{jpg,jpeg}")
+      Dir.glob("#{options.source_directory}/**/*.{jpg,jpeg,png}")
     end
 
     def options

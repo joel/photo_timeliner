@@ -27,6 +27,7 @@ module PhotoTimeliner
       case options.exif_strategy.to_sym
       when :basic then ExifBasic
       when :virtual then ExifVirtual
+      when :system then ExifSystem
       else
         raise ExifStrategyError, "Unknown exif strategy [#{options.exif_strategy}]"
       end
