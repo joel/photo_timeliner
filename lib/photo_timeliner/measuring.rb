@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_support/duration'
 module PhotoTimeliner
   module Measuring
     def call
@@ -11,7 +12,15 @@ module PhotoTimeliner
       after    = GC.stat(:total_allocated_objects)
       duration = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - start)
 
-      info = "Completed in #{(duration * 1000).round(1)}ms | Allocations: #{after - before}"
+      sub_info = if duration < 1
+                   "#{(duration * 1000).round(1)}ms"
+                 else
+                   ActiveSupport::Duration.build(duration).parts.map do |key, value|
+                     [value.to_i, key].join(' ')
+                   end.join(' ')
+                 end
+
+      info = "Completed in #{sub_info} | Allocations: #{after - before}"
 
       puts("\e[1m\e[32m[METRICS]\e[0m  \e[32m#{info}\e[0m")
 
