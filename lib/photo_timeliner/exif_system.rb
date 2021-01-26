@@ -5,14 +5,14 @@ require 'tty-command'
 
 module PhotoTimeliner
   class ExifSystem
-    def initialize(image_path)
-      @image_path = image_path
+    def initialize(media_path)
+      @media_path = media_path
     end
 
     def call
       cmd = TTY::Command.new(printer: printer_mode)
       result = cmd.run(
-        "exiftool -s -s -s -d '%Y%m%d%H%M' -datetimeoriginal #{escape(image_path)}"
+        "exiftool -s -s -s -d '%Y%m%d%H%M' -datetimeoriginal #{escape(media_path)}"
       )
 
       DateTime.strptime(result.out, '%Y%m%d%H%M')
@@ -34,6 +34,6 @@ module PhotoTimeliner
       Shellwords.escape(expr)
     end
 
-    attr_reader :image_path
+    attr_reader :media_path
   end
 end

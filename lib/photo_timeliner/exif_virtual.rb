@@ -4,12 +4,12 @@ require 'shellwords'
 
 module PhotoTimeliner
   class ExifVirtual
-    def initialize(image_path)
-      @image_path = image_path
+    def initialize(media_path)
+      @media_path = media_path
     end
 
     def call
-      relative_path = image_path.gsub(options.source_directory, '')[1..] # remove first /
+      relative_path = media_path.gsub(options.source_directory, '')[1..] # remove first /
 
       # For some reasons Dir.chdir doesn't get the excpected result
       # Dir.chdir(options.source_directory) do # conflicting chdir during another chdir block
@@ -31,7 +31,7 @@ module PhotoTimeliner
 
     private
 
-    attr_reader :image_path
+    attr_reader :media_path
 
     def options
       PhotoTimeliner.configuration.options

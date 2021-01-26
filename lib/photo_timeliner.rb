@@ -47,7 +47,8 @@ module PhotoTimeliner
     private
 
     def collection
-      Dir.glob("#{options.source_directory}/**/*.{jpg,jpeg,png}")
+      filters = Object.const_get("PhotoTimeliner::#{options.media.to_s.capitalize}Strategy").filters
+      Dir.glob("#{options.source_directory}/**/*.#{filters}")
     end
 
     def options
@@ -56,9 +57,9 @@ module PhotoTimeliner
 
     def queueing
       Thread.new do
-        collection.each do |image_path|
-          log("Reading... [#{File.basename(image_path).downcase}]")
-          queue << { image_path: image_path }.to_json
+        collection.each do |media_path|
+          log("Reading... [#{File.basename(media_path).downcase}]")
+          queue << { media_path: media_path }.to_json
         end
       end
     end
@@ -67,8 +68,8 @@ module PhotoTimeliner
       Thread.new do
         while (info = queue.pop)
           info = JSON.parse(info).transform_keys(&:to_sym)
-          log("[#{consumer_number}] consumed #{info[:image_path]}")
-          ImageHandler.new(**info).copy
+          log("[#{consumer_number}] consumed #{info[:media_path]}")
+          MediaHandler.new(**info).copy
           # sync.synchronize { progress_bar.advance }
           progress_bar.advance
         end

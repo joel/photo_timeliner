@@ -2,12 +2,12 @@
 
 module PhotoTimeliner
   class ExifBasic
-    def initialize(image_path)
-      @image_path = image_path
+    def initialize(media_path)
+      @media_path = media_path
     end
 
     def call
-      exif_info = Exif::Data.new(IO.read(image_path))
+      exif_info = Exif::Data.new(IO.read(media_path))
       return unless exif_info
       return unless exif_info&.date_time
 
@@ -16,6 +16,6 @@ module PhotoTimeliner
 
     private
 
-    attr_reader :image_path
+    attr_reader :media_path
   end
 end

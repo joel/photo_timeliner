@@ -7,11 +7,11 @@ require 'date'
 require 'json'
 
 module PhotoTimeliner
-  class ImageHandler
+  class MediaHandler
     include ErrorHandler
 
-    def initialize(image_path:)
-      @image_path = image_path
+    def initialize(media_path:)
+      @media_path = media_path
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -28,7 +28,7 @@ module PhotoTimeliner
       copy_cmd += ' -v' if options.verbose
 
       system(
-        "#{copy_cmd} #{escape(image_path)} #{escape(target_file_path)}"
+        "#{copy_cmd} #{escape(media_path)} #{escape(target_file_path)}"
       )
 
       system(
@@ -39,7 +39,7 @@ module PhotoTimeliner
     # rubocop:enable Metrics/MethodLength
 
     def file_name
-      File.basename(image_path)
+      File.basename(media_path)
     end
 
     private
@@ -50,13 +50,13 @@ module PhotoTimeliner
 
     def exif_date_time
       safe_exe(msg: 'EXIF') do
-        ExifStrategy.new(image_path).call
+        ExifStrategy.new(media_path).call
       end
     end
 
     def file_date_time
       safe_exe(msg: 'CTIME') do
-        File.ctime(image_path)
+        File.ctime(media_path)
       end
     end
 
@@ -85,8 +85,8 @@ module PhotoTimeliner
 
     def target_file_path
       @target_file_path ||= begin
-        file_extention = File.extname(image_path)
-        original_file_name = File.basename(image_path, '.*')
+        file_extention = File.extname(media_path)
+        original_file_name = File.basename(media_path, '.*')
 
         "#{options.target_directory}/#{sub_target_directory}/" \
           "#{name_prefix}-#{original_file_name}#{file_extention.downcase}"
@@ -97,6 +97,6 @@ module PhotoTimeliner
       PhotoTimeliner.configuration.options
     end
 
-    attr_reader :image_path
+    attr_reader :media_path
   end
 end

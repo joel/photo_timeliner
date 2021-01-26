@@ -5,7 +5,7 @@ require 'optparse'
 module PhotoTimeliner
   class OptparseExample
     class ScriptOptions
-      attr_accessor :verbose, :source_directory, :target_directory, :parallel, :exif_strategy
+      attr_accessor :verbose, :source_directory, :target_directory, :parallel, :exif_strategy, :media
 
       def initialize
         self.verbose = false
@@ -13,6 +13,7 @@ module PhotoTimeliner
         self.target_directory = './fixtures/sorted'
         self.parallel = 8
         self.exif_strategy = 'basic'
+        self.media = :image
       end
 
       def define_options(parser) # rubocop:disable Metrics/MethodLength
@@ -25,6 +26,7 @@ module PhotoTimeliner
         target_directory_option(parser)
         parallel_option(parser)
         exif_strategy_option(parser)
+        media_option(parser)
 
         boolean_verbose_option(parser)
 
@@ -44,6 +46,13 @@ module PhotoTimeliner
         end
 
         parser
+      end
+
+      def media_option(parser)
+        parser.on('--media [MEDIA]', %i[image video],
+                  'Select the media type (image, video)') do |media|
+          self.media = media
+        end
       end
 
       def parallel_option(parser)

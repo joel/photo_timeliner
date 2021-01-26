@@ -9,16 +9,16 @@ module PhotoTimeliner
     # delegate :call, to: :strategy
     def_delegators :strategy, :call
 
-    def initialize(image_path)
-      @image_path = image_path
+    def initialize(media_path)
+      @media_path = media_path
     end
 
     private
 
-    attr_reader :image_path
+    attr_reader :media_path
 
     def strategy
-      @strategy ||= strategy_selector.new(image_path)
+      @strategy ||= strategy_selector.new(media_path)
     end
 
     class ExifStrategyError < StandardError; end
