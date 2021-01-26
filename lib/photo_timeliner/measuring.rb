@@ -3,6 +3,8 @@
 require 'active_support/duration'
 module PhotoTimeliner
   module Measuring
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def call
       start  = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       before = GC.stat(:total_allocated_objects)
@@ -26,5 +28,7 @@ module PhotoTimeliner
 
       result
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
   end
 end

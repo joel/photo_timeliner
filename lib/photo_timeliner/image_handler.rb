@@ -14,6 +14,8 @@ module PhotoTimeliner
       @image_path = image_path
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def copy
       if File.exist?(target_file_path)
         log('SKIPPED! File already exists.')
@@ -30,9 +32,11 @@ module PhotoTimeliner
       )
 
       system(
-        "touch -a -m -t #{date_time.strftime('%Y%m%d%H%M')} #{escape(target_file_path)}"
+        "touch -a -m -t #{date_time.strftime("%Y%m%d%H%M")} #{escape(target_file_path)}"
       )
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def file_name
       File.basename(image_path)
