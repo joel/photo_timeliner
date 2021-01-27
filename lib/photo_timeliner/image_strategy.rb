@@ -2,7 +2,6 @@
 
 module PhotoTimeliner
   class ImageStrategy
-
     def self.filters
       '{jpg,jpeg,png}'
     end

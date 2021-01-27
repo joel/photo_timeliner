@@ -9,26 +9,35 @@ module PhotoTimeliner
       @media_path = media_path
     end
 
+    # We use ExifTool in order to extract all the dates of the media file
+    #
+    # exiftool -time:all -s
+    #
+    # "FileModifyDate"
+    # "FileAccessDate"
+    # "FileInodeChangeDate"
+    # "DateTimeOriginal"
+    # "CreateDate"
+    # "DateCreated"
+    # "ProfileDateTime"
+    #
+    # We avoid to use specific date as it is sometime missing
+    #
+    # exiftool -s -s -s -d '%Y%m%d%H%M' -CreateDate
+    #
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def call
       cmd = TTY::Command.new(printer: printer_mode)
-      # "FileModifyDate"
-      # "FileAccessDate"
-      # "FileInodeChangeDate"
-      # "DateTimeOriginal"
-      # "CreateDate"
-      # "DateCreated"
-      # "ProfileDateTime"
-
-      # result = cmd.run(
-      #   "exiftool -s -s -s -d '%Y%m%d%H%M' -CreateDate #{escape(media_path)}"
-      # )
 
       result = cmd.run(
         "exiftool -time:all -s #{escape(media_path)}"
       )
 
-      hash_result.map do |entry|
-        date_name, original_date_string = [ entry[:date_name], entry[:original_date_string] ]
+      # We pick the oldest date time returned. As it is likely to be the Created Date we are looking for.
+      hash_result(result.out).map do |entry|
+        date_name = entry[:date_name]
+        original_date_string = entry[:original_date_string]
         date_obj = parse_date(name: date_name, date_string: original_date_string)
 
         unless date_obj
@@ -43,8 +52,10 @@ module PhotoTimeliner
           date_string: date_string_short,
           date: date_obj
         }
-      end.compact.min { |x, y| x[:date] <=> y[:date] }[:date]
+      end.compact.min { |x, y| x[:date] <=> y[:date] }[:date] # rubocop:disable Style/MultilineBlockChain
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     private
 
@@ -58,6 +69,7 @@ module PhotoTimeliner
       end
     end
 
+    # As date a returned we possibly different format we try out until we find the suitable one
     def parse_date(name:, date_string:, date: nil, formats: ['%Y:%m:%d %H:%M:%S%Z', '%Y:%m:%d %H:%M:%S'])
       return date if date || formats.empty?
 

@@ -12,6 +12,8 @@ The name is change following those rules:
 
 image-original-name.jpg => '%Y%m%d_%H%M%S-image-original-name.jpg
 
+`PhotoTimeliner` can take care of your videos too! Just change the media type --media=video
+
 ## Installation
 
 ### Docker
@@ -68,7 +70,7 @@ bin/sort --help
 ```
 bin/sort --help
 
-Usage: bin/sort -s /Volume/Ext/Source -t /Volume/Ext/Destination --verbose
+Usage: bin/sort --no-verbose --source_directory='/Volumes/Ext/Source' --target_directory='/Volumes/Ext/Destination
 
 Specific options:
     -s SOURCE_DIRECTORY,             [OPTIONAL] Where the pictures are
@@ -78,6 +80,7 @@ Specific options:
     -n, --parallel PARALLEL          [OPTIONAL] How many threads
         --exif_strategy [EXIF_STRATEGY]
                                      Select the exif strategy (basic, virtual)
+        --media [MEDIA]              Select the media type (image, video, system)
     -v, --[no-]verbose               Run verbosely
 
 Common options:

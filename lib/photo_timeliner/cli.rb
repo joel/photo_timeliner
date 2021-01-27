@@ -12,12 +12,14 @@ module PhotoTimeliner
         self.source_directory = './fixtures/unsorted'
         self.target_directory = './fixtures/sorted'
         self.parallel = 8
-        self.exif_strategy = 'basic'
+        self.exif_strategy = 'system'
         self.media = :image
       end
 
-      def define_options(parser) # rubocop:disable Metrics/MethodLength
-        parser.banner = 'Usage: bin/sort -s /Volume/Ext/Source -t  -s /Volume/Ext/Destination --verbose'
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
+      def define_options(parser)
+        parser.banner = "Usage: bin/sort --no-verbose --source_directory='/Volumes/Ext/Source' --target_directory='/Volumes/Ext/Destination"
         parser.separator ''
         parser.separator 'Specific options:'
 
@@ -47,6 +49,8 @@ module PhotoTimeliner
 
         parser
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/MethodLength
 
       def media_option(parser)
         parser.on('--media [MEDIA]', %i[image video],
@@ -78,7 +82,7 @@ module PhotoTimeliner
 
       def exif_strategy_option(parser)
         parser.on('--exif_strategy [EXIF_STRATEGY]', %i[basic virtual system],
-                  'Select the exif strategy (basic, virtual)') do |exif_strategy|
+                  'Select the exif strategy (basic, virtual, system)') do |exif_strategy|
           self.exif_strategy = exif_strategy
         end
       end

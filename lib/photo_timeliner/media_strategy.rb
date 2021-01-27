@@ -2,7 +2,6 @@
 
 module PhotoTimeliner
   class MediaStrategy
-
     private
 
     def strategy
