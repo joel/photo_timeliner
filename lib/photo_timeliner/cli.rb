@@ -19,7 +19,8 @@ module PhotoTimeliner
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
       def define_options(parser)
-        parser.banner = "Usage: bin/sort --no-verbose --source_directory='/Volumes/Ext/Source' --target_directory='/Volumes/Ext/Destination"
+        parser.banner = "Usage: bin/sort --no-verbose --source_directory='/Volumes/Ext/Source' " \
+          "--target_directory='/Volumes/Ext/Destination"
         parser.separator ''
         parser.separator 'Specific options:'
 
