@@ -4,7 +4,7 @@ module PhotoTimeliner
   class VideoStrategy
 
     def self.filters
-      '{avi,flv,m4v,mov,wmv,mp4,MP4,TS,mkv}'
+      '{asf,avi,dv,flv,m4v,mkv,mod,mov,mp4,mp4,mpeg,mpg,ts,wav,wmv}'
     end
   end
 end
