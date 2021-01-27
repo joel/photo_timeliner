@@ -88,6 +88,11 @@ module PhotoTimeliner
         file_extention = File.extname(media_path)
         original_file_name = File.basename(media_path, '.*')
 
+        if m = original_file_name.match(/^(?<prefix>\d{8}_\d{6}-)(?<name>.*)/)
+          log("Already treated, updating date")
+          original_file_name = m[:name]
+        end
+
         "#{options.target_directory}/#{sub_target_directory}/" \
           "#{name_prefix}-#{original_file_name}#{file_extention.downcase}"
       end
